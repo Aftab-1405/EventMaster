@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Create Event{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-8 text-primary text-center">Create Event</h1>
+<form action="{{ url_for('create_event') }}" method="POST" class="max-w-md mx-auto bg-surface rounded-lg shadow-md p-6">
+    <div class="mb-4">
+        <label for="name" class="block text-gray-300 font-bold mb-2">Event Name:</label>
+        <input type="text" id="name" name="name" required class="w-full px-3 py-2 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text">
+    </div>
+    <div class="mb-4">
+        <label for="description" class="block text-gray-300 font-bold mb-2">Description:</label>
+        <textarea id="description" name="description" required class="w-full px-3 py-2 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text"></textarea>
+    </div>
+    <div class="mb-4">
+        <label for="event_date" class="block text-gray-300 font-bold mb-2">Date and Time:</label>
+        <input type="datetime-local" id="event_date" name="event_date" required class="w-full px-3 py-2 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text">
+    </div>
+    <div class="mb-4">
+        <label for="venue" class="block text-gray-300 font-bold mb-2">Venue:</label>
+        <input type="text" id="venue" name="venue" required class="w-full px-3 py-2 bg-background border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-text">
+    </div>
+    <button type="submit" class="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition duration-300">Create Event</button>
+</form>
+{% endblock %}

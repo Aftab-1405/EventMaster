@@ -1,0 +1,19 @@
+# Ignore environment variable files
+.env
+.env.*
+
+# Ignore Python cache and log files
+*.pyc
+__pycache__/
+*.log
+
+# Ignore MySQL credentials or configuration files
+*.cnf
+
+# Ignore secret keys or config files that may store sensitive data
+app_config.py
+
+# Ignore system-generated files
+*.DS_Store
+*.vscode/
+.idea/

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Event Attendees{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-8 text-primary text-center">Event Attendees</h1>
+<div class="bg-surface rounded-lg shadow-md p-6 max-w-2xl mx-auto">
+    <ul class="divide-y divide-gray-700">
+        {% for attendee in attendees %}
+        <li class="py-4">
+            <p class="text-lg font-semibold text-primary">{{ attendee[0] }}</p>
+            <p class="text-gray-400">{{ attendee[1] }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="text-center mt-6">
+    <a href="{{ url_for('list_events') }}" class="inline-block bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition duration-300">Back to Event List</a>
+</div>
+{% endblock %}

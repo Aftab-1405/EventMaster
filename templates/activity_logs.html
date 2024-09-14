@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Activity Logs{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-8 text-primary text-center">User Activity Logs</h1>
+<div class="bg-surface rounded-lg shadow-md p-6 max-w-3xl mx-auto">
+    <ul class="divide-y divide-gray-700">
+        {% for log in logs %}
+        <li class="py-4">
+            <p class="text-gray-400">{{ log[2] }}</p>
+            <p class="text-lg font-semibold text-primary">{{ log[1] }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

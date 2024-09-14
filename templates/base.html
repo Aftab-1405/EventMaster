@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EventMaster{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6D28D9', // Deep purple
+                        secondary: '#4C1D95', // Darker purple
+                        background: '#111827', // Very dark blue-gray
+                        surface: '#1F2937', // Dark blue-gray
+                        text: '#F3F4F6', // Very light gray
+                        accent: '#10B981', // Emerald green
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #F3F4F6;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease-out;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col dark">
+    <header class="bg-surface shadow-md">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <a href="{{ url_for('index') }}"
+                    class="text-2xl font-bold text-primary mb-4 md:mb-0 hover-lift">EventMaster</a>
+                <ul class="flex flex-wrap justify-center space-x-4">
+                    <li><a href="{{ url_for('list_events') }}"
+                            class="hover:text-primary transition hover-lift">Events</a></li>
+                    <li><a href="{{ url_for('create_event') }}" class="hover:text-primary transition hover-lift">Create
+                            Event</a></li>
+                    <li><a href="{{ url_for('activity_logs') }}"
+                            class="hover:text-primary transition hover-lift">Activity Logs</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto flex-grow p-4 md:p-6 animate-fade-in">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div
+            class="mb-4 p-4 rounded {% if category == 'success' %}bg-accent text-white{% else %}bg-red-600 text-white{% endif %} animate-fade-in">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-surface text-text py-4 mt-8">
+        <div class="container mx-auto text-center">
+            &copy; 2023 EventMaster. All rights reserved.
+        </div>
+    </footer>
+
+    <div id="notifications" class="fixed bottom-4 right-4 w-64 bg-surface rounded shadow-lg p-4 hidden"></div>
+
+    <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+</body>
+
+</html>
